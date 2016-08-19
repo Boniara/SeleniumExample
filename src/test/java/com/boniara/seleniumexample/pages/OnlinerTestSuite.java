@@ -1,58 +1,51 @@
 package com.boniara.seleniumexample.pages;
 
-import com.boniara.seleniumexample.utils.ChromeDriverLocal;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import com.boniara.seleniumexample.pages.onliner.*;
+import com.boniara.seleniumexample.utils.TestListener;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-public class OnlinerTestSuite {
+@Listeners(TestListener.class)
+public class OnlinerTestSuite extends BaseTest {
 
-    private WebDriver driver;
     private HomePage homePage;
 
     public OnlinerTestSuite() {
     }
 
-    @Test(enabled = false)
-    public void CheckOnlinerPage() throws InterruptedException {
+    @Test(description = "Test check equals of phone descriptions from " +
+            "phone page and reviews page")
+    public void checkPhoneDescriptions() throws InterruptedException {
+        homePage = PageFactory.initElements(driver, HomePage.class);
         CatalogPage catalogPage = homePage.catalogClick();
         MobileCatalogPage mobileCatalogPage = catalogPage.mobileCatalogClick();
         mobileCatalogPage.xiaomiCheckboxClick();
-        mobileCatalogPage.yearOfProductionCheckboxClick();
+        Thread.sleep(1000);
+        mobileCatalogPage.yearOfProductionCheckboxClick(2016);
+        Thread.sleep(5000);
         PhonePage phonePage = mobileCatalogPage.maxReviewsPageClick();
         String description = phonePage.getPhoneDescription();
         ReviewsPage reviewsPage = phonePage.reviewsPageClick();
         String descriptionFromReviewsPage = reviewsPage.getPhoneDescription();
-        Assert.assertEquals(description, descriptionFromReviewsPage);
+        Assert.assertEquals(description, descriptionFromReviewsPage, "Phone description are not identical." +
+                " Expected value = " + description + " actual value = " + descriptionFromReviewsPage);
     }
 
-    @Test
-    public void samsungCheck() throws InterruptedException {
+    @Test(description = "Test check search logic from search iframe")
+    public void checkSearchLogic() throws InterruptedException {
+        homePage = PageFactory.initElements(driver, HomePage.class);
         SearchIFrame frame = homePage.sendToInputField("sams");
         frame.checkResultContains("Sams").assertAll();
     }
 
-    @Test
-    public void loginWithFacebookCheck() throws InterruptedException {
+    @Test(description = "Test check enables of loginWithFacebook page and visibled of onliner logotype")
+    public void checkLoginWithFacebook() throws InterruptedException {
+        homePage = PageFactory.initElements(driver, HomePage.class);
         LoginWithFacebookPage loginWithFacebookPage = homePage.clickAndGetLoginFacebookWindow();
         loginWithFacebookPage.clickCancelButton();
         homePage.switchToHomeWindow();
-        Assert.assertTrue(homePage.isLogotypeDisplayed());
-    }
-
-    @BeforeClass
-    private void initDriver() {
-        ChromeDriverLocal chromeDriverLocal = ChromeDriverLocal.getInstance();
-        chromeDriverLocal.initDriver();
-        driver = new ChromeDriver();
-        homePage = new HomePage(driver);
-    }
-
-    @AfterClass
-    private void quitDriver() {
-        driver.quit();
+        Assert.assertTrue(homePage.isLogotypeDisplayed(), "Onliner logotype is not displayed");
     }
 }
