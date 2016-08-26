@@ -26,7 +26,7 @@ public class DriverFactory {
     private void getDriverByType() {
         synchronized (DriverFactory.class) {
             String browserName = ConfigUtil.getProperty("browser.name");
-            boolean generateAuto = Boolean.valueOf(ConfigUtil.getProperty("generate_auto"));
+            boolean generateAuto = Boolean.valueOf(ConfigUtil.getProperty("run_ss_auto"));
             switch (browserName.toLowerCase()) {
                 case CHROME_BROWSER:
                     driver = getChromeDriverInstance(generateAuto);

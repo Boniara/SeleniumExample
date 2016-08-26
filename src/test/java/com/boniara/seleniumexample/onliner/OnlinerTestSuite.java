@@ -19,8 +19,6 @@ public class OnlinerTestSuite extends BaseTest {
         homePage.openPage();
         CatalogPage catalogPage = homePage.catalogClick();
         MobileCatalogPage mobileCatalogPage = catalogPage.mobileCatalogClick();
-        /*MobileCatalogPage mobileCatalogPage = PageFactory.initElements(getDriver(), MobileCatalogPage.class);
-        mobileCatalogPage.openPage();*/
         CheckboxBlock checkboxBlock = PageFactory.initElements(getDriver(), CheckboxBlock.class);
         checkboxBlock.getCheckboxBlockForName("Производитель").checkCheckbox("Xiaomi");
         pause(24);

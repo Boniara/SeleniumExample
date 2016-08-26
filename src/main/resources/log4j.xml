@@ -26,11 +26,6 @@
         <priority value="OFF"/>
     </category>
 
-    <category name="com.boniara">
-        <level value="DEBUG"/>
-        <appender-ref ref="console"/>
-    </category>
-
     <root>
         <priority value="debug"/>
         <appender-ref ref="console" />
