@@ -15,12 +15,12 @@ public class OnlinerTestSuite extends BaseTest {
     @Test(description = "Test check equals of phone descriptions from " +
             "phone page and reviews page")
     public void checkPhoneDescriptions() {
-        /*HomePage homePage = PageFactory.initElements(getDriver(), HomePage.class);
+        HomePage homePage = PageFactory.initElements(getDriver(), HomePage.class);
         homePage.openPage();
         CatalogPage catalogPage = homePage.catalogClick();
-        MobileCatalogPage mobileCatalogPage = catalogPage.mobileCatalogClick();*/
-        MobileCatalogPage mobileCatalogPage = PageFactory.initElements(getDriver(), MobileCatalogPage.class);
-        mobileCatalogPage.openPage();
+        MobileCatalogPage mobileCatalogPage = catalogPage.mobileCatalogClick();
+        /*MobileCatalogPage mobileCatalogPage = PageFactory.initElements(getDriver(), MobileCatalogPage.class);
+        mobileCatalogPage.openPage();*/
         CheckboxBlock checkboxBlock = PageFactory.initElements(getDriver(), CheckboxBlock.class);
         checkboxBlock.getCheckboxBlockForName("Производитель").checkCheckbox("Xiaomi");
         pause(24);
