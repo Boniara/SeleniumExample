@@ -1,9 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-
-<suite parallel="methods" name="seleniumExample">
-    <test name="pageExamples">
-        <classes>
-            <class name="com.boniara.seleniumexample.pages.OnlinerTestSuite"/>
-        </classes>
-    </test>
-</suite>

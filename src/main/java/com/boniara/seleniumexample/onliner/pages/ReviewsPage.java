@@ -1,6 +1,6 @@
-package com.boniara.seleniumexample.pages.onliner;
+package com.boniara.seleniumexample.onliner.pages;
 
-import com.boniara.seleniumexample.webelements.TextField;
+import com.boniara.seleniumexample.ui.TextLabel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +15,7 @@ public class ReviewsPage extends BasePage {
     }
 
     public String getPhoneDescription() {
-        TextField textField = new TextField(phoneDescriptionFromReviewLink);
-        return textField.getValue();
+        TextLabel textLabel = new TextLabel(phoneDescriptionFromReviewLink);
+        return textLabel.getValue();
     }
 }
