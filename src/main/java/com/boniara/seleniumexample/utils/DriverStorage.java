@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class DriverStorage {
 
-    private Map<Long, WebDriver> driverMap;
+    private volatile Map<Long, WebDriver> driverMap;
     private volatile static DriverStorage storage;
 
     private DriverStorage() {

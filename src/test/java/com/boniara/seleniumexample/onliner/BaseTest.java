@@ -30,10 +30,9 @@ public class BaseTest {
     }
 
     protected void pause(Integer seconds) {
-        try {
-            Thread.currentThread().join(seconds * 1000);
-        } catch (InterruptedException e) {
-            LOG.debug(e);
+        Long currentTime = System.currentTimeMillis();
+        while((System.currentTimeMillis() - currentTime) < seconds * 1000) {
+            Thread.yield();
         }
     }
 }
