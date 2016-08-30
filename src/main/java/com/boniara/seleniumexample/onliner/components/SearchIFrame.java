@@ -1,4 +1,4 @@
-package com.boniara.seleniumexample.onliner.elements;
+package com.boniara.seleniumexample.onliner.components;
 
 import com.boniara.seleniumexample.onliner.pages.BasePage;
 import org.openqa.selenium.By;
