@@ -12,10 +12,9 @@ import java.util.concurrent.TimeUnit;
 
 public class DriverFactory {
 
-    private volatile static DriverFactory driverFactory = null;
-    private WebDriver driver;
-    private Capabilities capabilities;
-    protected DriverStorage storage;
+    private static WebDriver driver;
+    private static Capabilities capabilities;
+    protected static DriverStorage storage;
 
     private static final String CHROME_BROWSER = "chrome";
     private static final String FIREFOX_BROWSER = "firefox";
@@ -23,7 +22,7 @@ public class DriverFactory {
     private DriverFactory() {
     }
 
-    private void getDriverByType() {
+    private static void getDriverByType() {
         synchronized (DriverFactory.class) {
             String browserName = ConfigUtil.getProperty("browser.name");
             boolean generateAuto = Boolean.valueOf(ConfigUtil.getProperty("run_ss_auto"));
@@ -40,17 +39,17 @@ public class DriverFactory {
         }
     }
 
-    private WebDriver getChromeDriverInstance(boolean generateAuto) {
+    private static WebDriver getChromeDriverInstance(boolean generateAuto) {
         capabilities = DesiredCapabilities.chrome();
         return getDriver(capabilities, generateAuto);
     }
 
-    private WebDriver getFirefoxDriverInstance(boolean generateAuto) {
+    private static WebDriver getFirefoxDriverInstance(boolean generateAuto) {
         capabilities = DesiredCapabilities.firefox();
         return getDriver(capabilities, generateAuto);
     }
 
-    private WebDriver getDriver(Capabilities capabilities, boolean generateAuto) {
+    private static WebDriver getDriver(Capabilities capabilities, boolean generateAuto) {
         try {
             if(generateAuto)
                 DriverUtil.initDriver();
@@ -61,23 +60,11 @@ public class DriverFactory {
         return driver;
     }
 
-    public static DriverFactory getInstance() {
-        if(driverFactory == null) {
-            synchronized(DriverFactory.class) {
-                if(driverFactory == null)
-                    driverFactory = new DriverFactory();
-            }
-        }
-        return driverFactory;
-    }
-
-    public synchronized WebDriver getDriver() {
-        synchronized (DriverFactory.class) {
-            getDriverByType();
-            driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-            storage = DriverStorage.getInstance();
-            storage.put(Thread.currentThread().getId(), driver);
-            return storage.get(Thread.currentThread().getId());
-        }
+    public static WebDriver getDriver() {
+        getDriverByType();
+        driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+        storage = DriverStorage.getInstance();
+        storage.put(Thread.currentThread().getId(), driver);
+        return storage.get();
     }
 }

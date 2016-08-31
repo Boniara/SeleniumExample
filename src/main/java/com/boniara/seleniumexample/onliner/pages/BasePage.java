@@ -18,30 +18,25 @@ public class BasePage {
         this.url = ConfigUtil.getProperty("url");
     }
 
-    public synchronized void openPage() {
+    public void openPage() {
         getDriver().get(url);
         LOG.debug("Page " + url + " is opened");
     }
 
-    protected synchronized String setPageAbsoluteUrl(String url) {
+    protected String setPageAbsoluteUrl(String url) {
         this.url = url;
         return url;
     }
 
-    protected synchronized String setPageUrl(String postfixUrl) {
+    protected void setPageUrl(String postfixUrl) {
         this.url = ConfigUtil.getProperty("url") + postfixUrl;
-        return ConfigUtil.getProperty("url") + postfixUrl;
     }
 
-    protected synchronized boolean validateUrl(String url) {
+    protected boolean validateUrl(String url) {
         return HttpUtil.validate(url);
     }
 
-    private Long getThreadId() {
-        return Thread.currentThread().getId();
-    }
-
-    protected synchronized WebDriver getDriver() {
-        return DriverStorage.getInstance().get(getThreadId());
+    protected WebDriver getDriver() {
+        return DriverStorage.getInstance().get();
     }
 }

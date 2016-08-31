@@ -10,25 +10,32 @@ import java.util.Properties;
 public class ConfigUtil {
 
     private static final Logger LOG = Logger.getLogger(ConfigUtil.class);
-    private volatile static ConfigUtil configUtil = null;
+    private static InputStream inputStream;
 
     private static Properties properties = new Properties();
     private static final String PROPERTIES_FILE = "com.boniara.seleniumexample/onliner/config.properties";
 
-    private ConfigUtil() {
+    static{
+        inputStream = ConfigUtil.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE);
+        try {
+            properties.load(inputStream);
+        } catch (IOException e) {
+            LOG.error(e);
+        }
     }
 
     public static String getProperty(String key) {
-        InputStream inputStream = null;
-        String property = null;
+        String property = (System.getProperty(key) != null) ? System.getProperty(key) : null;
         try {
-            inputStream = ConfigUtil.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE);
             synchronized(properties) {
-                properties.load(inputStream);
-                property = properties.getProperty(key);
+                property = (property == null)? properties.getProperty(key) : null;
             }
-        } catch (IOException e) {
-            LOG.error(e);
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                LOG.error(e);
+            }
         }
         return property;
     }
@@ -41,15 +48,5 @@ public class ConfigUtil {
                 LOG.error(e);
             }
         return url;
-    }
-
-    public static ConfigUtil getInstance() {
-        if(configUtil == null) {
-            synchronized (ConfigUtil.class) {
-                if(configUtil == null)
-                    configUtil = new ConfigUtil();
-            }
-        }
-        return configUtil;
     }
 }

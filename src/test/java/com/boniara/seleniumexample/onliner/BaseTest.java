@@ -12,27 +12,24 @@ public class BaseTest {
     private static final Logger LOG = Logger.getLogger(BaseTest.class);
 
     @BeforeMethod(alwaysRun = true,description = "Init driver")
-    protected synchronized void initDriver() {
-        DriverFactory.getInstance().getDriver();
+    protected void initDriver() {
+        DriverFactory.getDriver();
     }
 
     @AfterMethod(alwaysRun = true, description = "Quit driver")
-    protected synchronized void quitDriver() {
+    protected void quitDriver() {
         getDriver().quit();
     }
 
-    private Long getThreadId() {
-        return Thread.currentThread().getId();
-    }
-
-    protected synchronized WebDriver getDriver() {
-        return DriverStorage.getInstance().get(getThreadId());
+    protected WebDriver getDriver() {
+        return DriverStorage.getInstance().get();
     }
 
     protected void pause(Integer seconds) {
-        Long currentTime = System.currentTimeMillis();
-        while((System.currentTimeMillis() - currentTime) < seconds * 1000) {
-            Thread.yield();
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            LOG.error(e);
         }
     }
 }

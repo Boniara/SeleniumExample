@@ -24,7 +24,7 @@ public class Image {
         this.imageName = imageName;
     }
 
-    public boolean isAccess() {
+    public boolean isDisplayed() {
         LOG.debug("Image " + imageName + " is present");
         if(webElement.isEnabled() && webElement.isDisplayed())
             return true;

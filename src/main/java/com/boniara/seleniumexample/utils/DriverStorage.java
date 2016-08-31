@@ -14,15 +14,15 @@ public class DriverStorage {
     }
 
     public void put(Long idThread, WebDriver driver) {
-        synchronized (driverMap) {
-            driverMap.put(idThread, driver);
-        }
+        driverMap.put(idThread, driver);
     }
 
-    public WebDriver get(Long idThread) {
-        synchronized (driverMap) {
-            return driverMap.get(idThread);
-        }
+    public WebDriver get() {
+        return driverMap.get(getThreadId());
+    }
+
+    private Long getThreadId() {
+        return Thread.currentThread().getId();
     }
 
     public static DriverStorage getInstance() {

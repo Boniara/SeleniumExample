@@ -9,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import java.util.Set;
 
 public class HomePage extends BasePage {
@@ -53,7 +52,7 @@ public class HomePage extends BasePage {
 
     public boolean isLogotypeDisplayed() {
         Image image = new Image(onlinerLogotype);
-        return image.isAccess();
+        return image.isDisplayed();
     }
 
     public CatalogPage catalogClick() {

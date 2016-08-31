@@ -28,7 +28,7 @@ public class TestListener implements ITestListener {
     }
 
     public synchronized void onTestFailure(ITestResult iTestResult) {
-        WebDriver driver = DriverStorage.getInstance().get(Thread.currentThread().getId());
+        WebDriver driver = DriverStorage.getInstance().get();
         File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             Long currentTime = System.currentTimeMillis();
