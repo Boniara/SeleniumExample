@@ -2,7 +2,7 @@ package com.boniara.seleniumexample.onliner;
 
 import com.boniara.seleniumexample.onliner.components.CheckboxBlock;
 import com.boniara.seleniumexample.onliner.components.SearchIFrame;
-import com.boniara.seleniumexample.onliner.pages.*;
+import com.boniara.seleniumexample.onliner.pages.onliner.*;
 import com.boniara.seleniumexample.utils.TestListener;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;

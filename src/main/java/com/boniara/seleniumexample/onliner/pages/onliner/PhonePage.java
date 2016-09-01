@@ -1,5 +1,6 @@
-package com.boniara.seleniumexample.onliner.pages;
+package com.boniara.seleniumexample.onliner.pages.onliner;
 
+import com.boniara.seleniumexample.onliner.pages.BasePage;
 import com.boniara.seleniumexample.ui.Link;
 import com.boniara.seleniumexample.ui.TextLabel;
 import org.openqa.selenium.WebDriver;

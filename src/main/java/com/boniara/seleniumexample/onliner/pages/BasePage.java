@@ -1,6 +1,5 @@
 package com.boniara.seleniumexample.onliner.pages;
 
-import com.boniara.seleniumexample.utils.ConfigUtil;
 import com.boniara.seleniumexample.utils.DriverStorage;
 import com.boniara.seleniumexample.utils.HttpUtil;
 import org.apache.log4j.Logger;
