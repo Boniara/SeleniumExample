@@ -1,6 +1,6 @@
-package com.boniara.seleniumexample.onliner.components;
+package com.boniara.seleniumexample.components;
 
-import com.boniara.seleniumexample.onliner.pages.BasePage;
+import com.boniara.seleniumexample.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

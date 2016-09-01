@@ -1,39 +1,30 @@
 package com.boniara.seleniumexample.ui;
 
-import com.boniara.seleniumexample.utils.ConfigUtil;
-import com.boniara.seleniumexample.utils.StackTraceUtil;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
-public class TextInput {
+public class TextInput extends BaseUI {
 
     private static final Logger LOG = Logger.getLogger(TextInput.class);
-    private StackTraceUtil stackTraceUtil;
-
-    private WebElement webElement;
-    private String inputName;
 
     public TextInput(WebElement webElement) {
-        this.webElement = webElement;
-        this.stackTraceUtil = new StackTraceUtil();
-        this.inputName = stackTraceUtil.getUINameFrom(ConfigUtil.getProperty("pages.package"));
+        super(webElement);
     }
 
     public TextInput(WebElement webElement, String inputName) {
-        this.webElement = webElement;
-        this.inputName = inputName;
+        super(webElement, inputName);
     }
 
     public void sendKeys(String message) {
         synchronized (this) {
-            LOG.debug("Send text: " + message + " to text input field " + inputName);
+            LOG.debug("Send text: " + message + " to text input field " + webElementName);
             if (webElement.isEnabled() && webElement.isDisplayed())
                 webElement.sendKeys(message);
         }
     }
 
     public void submit() {
-        LOG.debug("Submit " + inputName + " text input field");
+        LOG.debug("Submit " + webElementName + " text input field");
         if(webElement.isEnabled() && webElement.isDisplayed())
             webElement.submit();
     }

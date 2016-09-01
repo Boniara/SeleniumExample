@@ -1,6 +1,6 @@
-package com.boniara.seleniumexample.onliner.components;
+package com.boniara.seleniumexample.components;
 
-import com.boniara.seleniumexample.onliner.pages.BasePage;
+import com.boniara.seleniumexample.pages.BasePage;
 import com.boniara.seleniumexample.ui.CheckBox;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -60,12 +60,12 @@ public class CheckboxBlock extends BasePage {
     }
 
     public CheckboxBlock getCheckboxBlockForName(String name) {
-        switch(name) {
-            case "Производитель":
+        switch(name.toLowerCase()) {
+            case "производитель":
                 webElementList = produceOfPhoneList;
                 checboxList = produceOfPhoneCheckBoxList;
                 break;
-            case "Дата выхода на рынок":
+            case "дата выхода на рынок":
                 webElementList = yearOfProductionList;
                 checboxList = yearOfProductionCheckboxList;
                 break;

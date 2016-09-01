@@ -1,31 +1,22 @@
 package com.boniara.seleniumexample.ui;
 
-import com.boniara.seleniumexample.utils.ConfigUtil;
-import com.boniara.seleniumexample.utils.StackTraceUtil;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
-public class Link {
+public class Link extends BaseUI {
 
     private static final Logger LOG = Logger.getLogger(Link.class);
-    private StackTraceUtil stackTraceUtil;
-
-    private WebElement webElement;
-    private String linkName;
 
     public Link(WebElement webElement){
-        this.webElement = webElement;
-        this.stackTraceUtil = new StackTraceUtil();
-        this.linkName = stackTraceUtil.getUINameFrom(ConfigUtil.getProperty("pages.package"));
+        super(webElement);
     }
 
     public Link(WebElement webElement, String linkName){
-        this.webElement = webElement;
-        this.linkName = linkName;
+        super(webElement, linkName);
     }
 
     public void click() {
-        LOG.debug("Click " + linkName + " link");
+        LOG.debug("Click " + webElementName + " link");
         if(webElement.isEnabled() && webElement.isDisplayed())
             webElement.click();
     }

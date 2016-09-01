@@ -5,7 +5,6 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -63,6 +62,7 @@ public class DriverFactory {
     public static WebDriver getDriver() {
         getDriverByType();
         driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
         storage = DriverStorage.getInstance();
         storage.put(Thread.currentThread().getId(), driver);
         return storage.get();

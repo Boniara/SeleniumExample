@@ -91,7 +91,8 @@ public class StackTraceUtil {
             LOG.error(e);
         } finally {
             try {
-                reader.close();
+                if(reader != null)
+                    reader.close();
             } catch (IOException e) {
                 LOG.error(e);
             }

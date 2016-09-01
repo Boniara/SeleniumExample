@@ -1,6 +1,6 @@
-package com.boniara.seleniumexample.onliner.pages.onliner;
+package com.boniara.seleniumexample.pages.onliner;
 
-import com.boniara.seleniumexample.onliner.pages.BasePage;
+import com.boniara.seleniumexample.pages.BasePage;
 import com.boniara.seleniumexample.ui.Button;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,7 +20,7 @@ public class LoginWithFacebookPage extends BasePage {
             "_denied%26state%3D37eb9c76dc92749b08ab1639cc9b4e20%23_%3D_&display=popup&locale" +
             "=ru_RU&logger_id=97502e82-9029-40f4-948e-e4bedf7dd5c8";
 
-    @FindBy(xpath = "//input[@value='Отмена']")
+    @FindBy(xpath = "//input[@name='cancel']")
     private WebElement cancelButton;
 
     public LoginWithFacebookPage(WebDriver driver) {

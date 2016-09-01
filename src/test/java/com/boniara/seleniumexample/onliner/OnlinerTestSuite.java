@@ -1,8 +1,8 @@
 package com.boniara.seleniumexample.onliner;
 
-import com.boniara.seleniumexample.onliner.components.CheckboxBlock;
-import com.boniara.seleniumexample.onliner.components.SearchIFrame;
-import com.boniara.seleniumexample.onliner.pages.onliner.*;
+import com.boniara.seleniumexample.components.CheckboxBlock;
+import com.boniara.seleniumexample.components.SearchIFrame;
+import com.boniara.seleniumexample.pages.onliner.*;
 import com.boniara.seleniumexample.utils.TestListener;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -23,14 +23,14 @@ public class OnlinerTestSuite extends BaseTest {
         mobileCatalogPage.openPage();
         CheckboxBlock checkboxBlock = PageFactory.initElements(getDriver(), CheckboxBlock.class);
         checkboxBlock.getCheckboxBlockForName("Производитель").checkCheckbox("Xiaomi");
-        //pause(24);
-        //checkboxBlock.getCheckboxBlockForName("Дата выхода на рынок").checkCheckbox(2016);
+        pause(8);
+        checkboxBlock.getCheckboxBlockForName("Дата выхода на рынок").checkCheckbox(2016);
         pause(8);
         PhonePage phonePage = mobileCatalogPage.maxReviewsPageClick();
         String description = phonePage.getPhoneDescription();
         ReviewsPage reviewsPage = phonePage.reviewsPageClick();
         String descriptionFromReviewsPage = reviewsPage.getPhoneDescription();
-        Assert.assertEquals(description, descriptionFromReviewsPage, "Phone description are not identical");
+        Assert.assertEquals(description, descriptionFromReviewsPage, "Phone descriptions are not identical");
     }
 
     @Test(description = "Test check search logic from search iframe")
