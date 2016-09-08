@@ -37,6 +37,6 @@ public class BasePage {
     }
 
     protected WebDriver getDriver() {
-        return DriverStorage.getInstance().get();
+        return DriverStorage.get();
     }
 }

@@ -17,7 +17,6 @@ public class Button extends BaseUI {
 
     public void click() {
         LOG.debug("Click " + webElementName + " button");
-        if (webElement.isEnabled() && webElement.isDisplayed())
-            webElement.click();
+        webElement.click();
     }
 }

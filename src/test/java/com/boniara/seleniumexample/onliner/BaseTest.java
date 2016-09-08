@@ -22,7 +22,7 @@ public class BaseTest {
     }
 
     protected WebDriver getDriver() {
-        return DriverStorage.getInstance().get();
+        return DriverStorage.get();
     }
 
     protected void pause(Integer seconds) {

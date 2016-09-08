@@ -1,4 +1,4 @@
-package com.boniara.seleniumexample.components;
+package com.boniara.seleniumexample.components.onliner;
 
 import com.boniara.seleniumexample.pages.BasePage;
 import com.boniara.seleniumexample.ui.CheckBox;
@@ -12,6 +12,21 @@ public class CheckboxBlock extends BasePage {
 
     private List<WebElement> webElementList;
     private List<WebElement> checboxList;
+
+    public enum CheckboxType {
+
+        PRODUCER("Производитель"), ANNOUNCED("Дата выхода на рынок");
+
+        private String type;
+
+        CheckboxType(String type) {
+            this.type = type;
+        }
+
+        public String getType() {
+            return type;
+        }
+    }
 
     @FindBy(xpath = "//div[@class='schema-filter__fieldset' and descendant::span[text()='Дата выхода на рынок']]" +
             "//span[@class='i-checkbox']")
@@ -59,13 +74,13 @@ public class CheckboxBlock extends BasePage {
         checkBox.check();
     }
 
-    public CheckboxBlock getCheckboxBlockForName(String name) {
-        switch(name.toLowerCase()) {
-            case "производитель":
+    public CheckboxBlock getCheckboxBlockForName(CheckboxType name) {
+        switch(name) {
+            case PRODUCER:
                 webElementList = produceOfPhoneList;
                 checboxList = produceOfPhoneCheckBoxList;
                 break;
-            case "дата выхода на рынок":
+            case ANNOUNCED:
                 webElementList = yearOfProductionList;
                 checboxList = yearOfProductionCheckboxList;
                 break;

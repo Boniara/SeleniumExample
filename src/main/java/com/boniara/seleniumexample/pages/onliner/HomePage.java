@@ -1,6 +1,6 @@
 package com.boniara.seleniumexample.pages.onliner;
 
-import com.boniara.seleniumexample.components.SearchIFrame;
+import com.boniara.seleniumexample.components.onliner.SearchIFrame;
 import com.boniara.seleniumexample.pages.BasePage;
 import com.boniara.seleniumexample.ui.Button;
 import com.boniara.seleniumexample.ui.Image;

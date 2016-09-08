@@ -1,7 +1,7 @@
 package com.boniara.seleniumexample.onliner;
 
-import com.boniara.seleniumexample.components.CheckboxBlock;
-import com.boniara.seleniumexample.components.SearchIFrame;
+import com.boniara.seleniumexample.components.onliner.CheckboxBlock;
+import com.boniara.seleniumexample.components.onliner.SearchIFrame;
 import com.boniara.seleniumexample.pages.onliner.*;
 import com.boniara.seleniumexample.utils.TestListener;
 import org.openqa.selenium.support.PageFactory;
@@ -15,16 +15,14 @@ public class OnlinerTestSuite extends BaseTest {
     @Test(description = "Test check equals of phone descriptions from " +
             "phone page and reviews page")
     public void checkPhoneDescriptions() {
-        /*HomePage homePage = PageFactory.initElements(getDriver(), HomePage.class);
+        HomePage homePage = PageFactory.initElements(getDriver(), HomePage.class);
         homePage.openPage();
         CatalogPage catalogPage = homePage.catalogClick();
-        MobileCatalogPage mobileCatalogPage = catalogPage.mobileCatalogClick();*/
-        MobileCatalogPage mobileCatalogPage = PageFactory.initElements(getDriver(), MobileCatalogPage.class);
-        mobileCatalogPage.openPage();
+        MobileCatalogPage mobileCatalogPage = catalogPage.mobileCatalogClick();
         CheckboxBlock checkboxBlock = PageFactory.initElements(getDriver(), CheckboxBlock.class);
-        checkboxBlock.getCheckboxBlockForName("Производитель").checkCheckbox("Xiaomi");
+        checkboxBlock.getCheckboxBlockForName(CheckboxBlock.CheckboxType.PRODUCER).checkCheckbox("Xiaomi");
         pause(8);
-        checkboxBlock.getCheckboxBlockForName("Дата выхода на рынок").checkCheckbox(2016);
+        checkboxBlock.getCheckboxBlockForName(CheckboxBlock.CheckboxType.ANNOUNCED).checkCheckbox(2016);
         pause(8);
         PhonePage phonePage = mobileCatalogPage.maxReviewsPageClick();
         String description = phonePage.getPhoneDescription();

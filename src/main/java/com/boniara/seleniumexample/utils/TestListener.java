@@ -28,7 +28,7 @@ public class TestListener implements ITestListener {
     }
 
     public synchronized void onTestFailure(ITestResult iTestResult) {
-        WebDriver driver = DriverStorage.getInstance().get();
+        WebDriver driver = DriverStorage.get();
         File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             Long currentTime = System.currentTimeMillis();
@@ -42,6 +42,8 @@ public class TestListener implements ITestListener {
     }
 
     public void onTestSkipped(ITestResult iTestResult) {
+        WebDriver driver = DriverStorage.get();
+        driver.quit();
         LOG.debug("Test with thread " + Thread.currentThread().getName() + " is skipped");
     }
 

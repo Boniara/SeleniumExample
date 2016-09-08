@@ -11,9 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class DriverFactory {
 
-    private static WebDriver driver;
     private static Capabilities capabilities;
-    protected static DriverStorage storage;
 
     private static final String CHROME_BROWSER = "chrome";
     private static final String FIREFOX_BROWSER = "firefox";
@@ -21,19 +19,17 @@ public class DriverFactory {
     private DriverFactory() {
     }
 
-    private static void getDriverByType() {
+    private static WebDriver getDriverByType() {
         synchronized (DriverFactory.class) {
             String browserName = ConfigUtil.getProperty("browser.name");
             boolean generateAuto = Boolean.valueOf(ConfigUtil.getProperty("run_ss_auto"));
             switch (browserName.toLowerCase()) {
                 case CHROME_BROWSER:
-                    driver = getChromeDriverInstance(generateAuto);
-                    break;
+                    return getChromeDriverInstance(generateAuto);
                 case FIREFOX_BROWSER:
-                    driver = getFirefoxDriverInstance(generateAuto);
-                    break;
+                    return getFirefoxDriverInstance(generateAuto);
                 default:
-                    break;
+                    throw new RuntimeException(String.format("Browser $s not found", browserName));
             }
         }
     }
@@ -49,6 +45,7 @@ public class DriverFactory {
     }
 
     private static WebDriver getDriver(Capabilities capabilities, boolean generateAuto) {
+        WebDriver driver;
         try {
             if(generateAuto)
                 DriverUtil.initDriver();
@@ -60,11 +57,10 @@ public class DriverFactory {
     }
 
     public static WebDriver getDriver() {
-        getDriverByType();
+        WebDriver driver = getDriverByType();
         driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        storage = DriverStorage.getInstance();
-        storage.put(Thread.currentThread().getId(), driver);
-        return storage.get();
+        DriverStorage.put(Thread.currentThread().getId(), driver);
+        return DriverStorage.get();
     }
 }

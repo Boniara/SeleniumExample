@@ -25,7 +25,6 @@ public class TextInput extends BaseUI {
 
     public void submit() {
         LOG.debug("Submit " + webElementName + " text input field");
-        if(webElement.isEnabled() && webElement.isDisplayed())
-            webElement.submit();
+        webElement.submit();
     }
 }
