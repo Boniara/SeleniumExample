@@ -17,15 +17,15 @@ public class DriverFactory {
     private DriverFactory() {
     }
 
-    private static WebDriver getDriverByType() {
+    public static WebDriver getDriverByType() {
         synchronized (DriverFactory.class) {
             String browserName = ConfigUtil.getProperty("browser.name");
             boolean generateAuto = Boolean.valueOf(ConfigUtil.getProperty("run_ss_auto"));
             switch (browserName.toLowerCase()) {
                 case CHROME_BROWSER:
-                    return getChromeDriverInstance(generateAuto);
+                    return safetyGet(getChromeDriverInstance(generateAuto));
                 case FIREFOX_BROWSER:
-                    return getFirefoxDriverInstance(generateAuto);
+                    return safetyGet(getFirefoxDriverInstance(generateAuto));
                 default:
                     throw new RuntimeException(String.format("Browser $s not found", browserName));
             }
@@ -33,15 +33,15 @@ public class DriverFactory {
     }
 
     private static WebDriver getChromeDriverInstance(boolean generateAuto) {
-        return getDriver(DesiredCapabilities.chrome(), generateAuto);
+        return safetyGet(DesiredCapabilities.chrome(), generateAuto);
     }
 
     private static WebDriver getFirefoxDriverInstance(boolean generateAuto) {
         Capabilities capabilities = DesiredCapabilities.firefox();
-        return getDriver(capabilities, generateAuto);
+        return safetyGet(capabilities, generateAuto);
     }
 
-    private static WebDriver getDriver(Capabilities capabilities, boolean generateAuto) {
+    private static WebDriver safetyGet(Capabilities capabilities, boolean generateAuto) {
         WebDriver driver;
         try {
             if(generateAuto)
@@ -53,8 +53,8 @@ public class DriverFactory {
         return driver;
     }
 
-    public static WebDriver getDriver() {
-        DriverStorage.put(Thread.currentThread().getId(), getDriverByType());
+    private static WebDriver safetyGet(WebDriver driver) {
+        DriverStorage.put(Thread.currentThread().getId(), driver);
         DriverStorage.get().manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
         DriverStorage.get().manage().window().maximize();
         return DriverStorage.get();

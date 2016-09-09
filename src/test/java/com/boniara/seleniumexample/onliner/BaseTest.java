@@ -13,7 +13,7 @@ public class BaseTest {
 
     @BeforeMethod(alwaysRun = true,description = "Init driver")
     protected void initDriver() {
-        DriverFactory.getDriver();
+        DriverFactory.getDriverByType();
     }
 
     @AfterMethod(alwaysRun = true, description = "Quit driver")
