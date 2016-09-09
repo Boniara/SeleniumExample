@@ -1,15 +1,16 @@
 package com.boniara.seleniumexample.ui;
 
 import com.boniara.seleniumexample.utils.ConfigUtil;
+import com.boniara.seleniumexample.utils.DriverStorage;
 import com.boniara.seleniumexample.utils.StackTraceUtil;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BaseUI {
 
     protected StackTraceUtil stackTraceUtil;
-    protected WebElement webElement;
+    private WebElement webElement;
     protected String webElementName;
 
     protected BaseUI(WebElement webElement) {
@@ -23,7 +24,7 @@ public class BaseUI {
         this.webElementName = webElementName;
     }
 
-    protected ExpectedCondition<WebElement> isClickable(WebElement webElement) {
-        return ExpectedConditions.elementToBeClickable(webElement);
+    protected WebElement getElement() {
+        return (new WebDriverWait(DriverStorage.get(), 16)).until(ExpectedConditions.visibilityOf(webElement));
     }
 }

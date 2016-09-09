@@ -17,6 +17,6 @@ public class CheckBox extends BaseUI {
 
     public void check() {
         LOG.debug("Click " + webElementName + " checkbox");
-        webElement.click();
+        getElement().click();
     }
 }

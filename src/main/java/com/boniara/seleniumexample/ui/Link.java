@@ -17,6 +17,6 @@ public class Link extends BaseUI {
 
     public void click() {
         LOG.debug("Click " + webElementName + " link");
-        webElement.click();
+        getElement().click();
     }
 }

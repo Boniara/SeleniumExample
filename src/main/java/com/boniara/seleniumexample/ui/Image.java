@@ -17,6 +17,6 @@ public class Image extends BaseUI {
 
     public boolean isDisplayed() {
         LOG.debug("Image " + webElementName + " is present");
-        return (webElement.isEnabled() && webElement.isDisplayed());
+        return (getElement().isEnabled() && getElement().isDisplayed());
     }
 }

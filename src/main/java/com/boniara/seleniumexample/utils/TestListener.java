@@ -42,8 +42,6 @@ public class TestListener implements ITestListener {
     }
 
     public void onTestSkipped(ITestResult iTestResult) {
-        WebDriver driver = DriverStorage.get();
-        driver.quit();
         LOG.debug("Test with thread " + Thread.currentThread().getName() + " is skipped");
     }
 

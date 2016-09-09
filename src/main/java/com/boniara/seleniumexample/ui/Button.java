@@ -17,6 +17,6 @@ public class Button extends BaseUI {
 
     public void click() {
         LOG.debug("Click " + webElementName + " button");
-        webElement.click();
+        getElement().click();
     }
 }

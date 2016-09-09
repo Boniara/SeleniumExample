@@ -16,7 +16,7 @@ public class TextLabel extends BaseUI {
     }
 
     public String getValue() {
-        LOG.debug("Get value " + webElement.getText() + " from text field " + webElementName);
-        return webElement.getText();
+        LOG.debug("Get value " + getElement().getText() + " from text field " + webElementName);
+        return getElement().getText();
     }
 }

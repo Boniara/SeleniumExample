@@ -16,15 +16,12 @@ public class TextInput extends BaseUI {
     }
 
     public void sendKeys(String message) {
-        synchronized (this) {
-            LOG.debug("Send text: " + message + " to text input field " + webElementName);
-            if (webElement.isEnabled() && webElement.isDisplayed())
-                webElement.sendKeys(message);
-        }
+        LOG.debug("Send text: " + message + " to text input field " + webElementName);
+        getElement().sendKeys(message);
     }
 
     public void submit() {
         LOG.debug("Submit " + webElementName + " text input field");
-        webElement.submit();
+        getElement().submit();
     }
 }

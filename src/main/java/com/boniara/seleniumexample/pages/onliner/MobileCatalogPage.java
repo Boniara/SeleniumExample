@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MobileCatalogPage extends BasePage {
 
@@ -41,10 +40,6 @@ public class MobileCatalogPage extends BasePage {
     }
 
     public PhonePage maxReviewsPageClick() {
-        while(!maxReviewPhone.isEnabled()) {
-            Thread.yield();
-        }
-        ExpectedConditions.elementToBeClickable(link);
         Link link = new Link(maxReviewPhone);
         link.click();
         return PageFactory.initElements(getDriver(), PhonePage.class);

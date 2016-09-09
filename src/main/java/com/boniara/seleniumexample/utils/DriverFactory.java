@@ -11,8 +11,6 @@ import java.util.concurrent.TimeUnit;
 
 public class DriverFactory {
 
-    private static Capabilities capabilities;
-
     private static final String CHROME_BROWSER = "chrome";
     private static final String FIREFOX_BROWSER = "firefox";
 
@@ -35,12 +33,11 @@ public class DriverFactory {
     }
 
     private static WebDriver getChromeDriverInstance(boolean generateAuto) {
-        capabilities = DesiredCapabilities.chrome();
-        return getDriver(capabilities, generateAuto);
+        return getDriver(DesiredCapabilities.chrome(), generateAuto);
     }
 
     private static WebDriver getFirefoxDriverInstance(boolean generateAuto) {
-        capabilities = DesiredCapabilities.firefox();
+        Capabilities capabilities = DesiredCapabilities.firefox();
         return getDriver(capabilities, generateAuto);
     }
 
@@ -57,10 +54,9 @@ public class DriverFactory {
     }
 
     public static WebDriver getDriver() {
-        WebDriver driver = getDriverByType();
-        driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        DriverStorage.put(Thread.currentThread().getId(), driver);
+        DriverStorage.put(Thread.currentThread().getId(), getDriverByType());
+        DriverStorage.get().manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+        DriverStorage.get().manage().window().maximize();
         return DriverStorage.get();
     }
 }
