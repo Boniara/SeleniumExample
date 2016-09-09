@@ -20,12 +20,12 @@ public class DriverFactory {
     public static WebDriver getDriverByType() {
         synchronized (DriverFactory.class) {
             String browserName = ConfigUtil.getProperty("browser.name");
-            boolean generateAuto = Boolean.valueOf(ConfigUtil.getProperty("run_ss_auto"));
+            boolean runSSAuto = Boolean.valueOf(ConfigUtil.getProperty("run_ss_auto"));
             switch (browserName.toLowerCase()) {
                 case CHROME_BROWSER:
-                    return safetyGet(getChromeDriverInstance(generateAuto));
+                    return safetyGet(getChromeDriverInstance(runSSAuto));
                 case FIREFOX_BROWSER:
-                    return safetyGet(getFirefoxDriverInstance(generateAuto));
+                    return safetyGet(getFirefoxDriverInstance(runSSAuto));
                 default:
                     throw new RuntimeException(String.format("Browser $s not found", browserName));
             }
