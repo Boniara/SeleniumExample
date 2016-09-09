@@ -25,6 +25,6 @@ public class BaseUI {
     }
 
     protected WebElement getElement() {
-        return (new WebDriverWait(DriverStorage.get(), 16)).until(ExpectedConditions.visibilityOf(webElement));
+        return (new WebDriverWait(DriverStorage.get(), 16)).until(ExpectedConditions.elementToBeClickable(webElement));
     }
 }
